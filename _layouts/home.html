@@ -1,0 +1,80 @@
+---
+layout: default
+---
+{%- comment -%}
+  Landing layout for a project site. Driven by page front matter:
+    title    — project name (hero h1)
+    tagline  — short kicker shown above the title
+    lead     — hero paragraph
+    repo     — "owner/name" (drives GitHub button + stars/license badges)
+    nuget    — package id (drives NuGet button + version/downloads badges)
+    ctas     — optional [{label, href, primary}] to override default buttons
+    badges   — optional [{href, img, alt}] appended after auto badges
+    features — optional [{title, body}] rendered as a card grid
+  The markdown body renders below the hero inside a readable column.
+{%- endcomment -%}
+
+<section class="hero">
+  <div class="wrap">
+    {%- if page.tagline -%}<p class="hero-kicker">{{ page.tagline }}</p>{%- endif -%}
+    <h1 class="hero-title">{{ page.title | default: site.title }}</h1>
+    {%- if page.lead -%}<p class="hero-lead">{{ page.lead }}</p>{%- endif -%}
+
+    <div class="hero-actions">
+      {%- if page.ctas -%}
+        {%- for c in page.ctas -%}
+          <a class="btn{% if c.primary %} btn-primary{% endif %}" href="{{ c.href }}"{% unless c.href contains 'daemonicai.github.io' %} rel="noopener"{% endunless %}>{{ c.label }}</a>
+        {%- endfor -%}
+      {%- else -%}
+        {%- if page.repo -%}<a class="btn btn-primary" href="https://github.com/{{ page.repo }}" rel="noopener">View on GitHub →</a>{%- endif -%}
+        {%- if page.nuget -%}<a class="btn" href="https://www.nuget.org/packages/{{ page.nuget }}" rel="noopener">Get on NuGet</a>{%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Auto-generated shields, themed flat-square to match the site {%- endcomment -%}
+    <div class="badges">
+      {%- if page.nuget -%}
+        <a href="https://www.nuget.org/packages/{{ page.nuget }}" rel="noopener"><img alt="NuGet version" src="https://img.shields.io/nuget/v/{{ page.nuget }}?style=flat-square&labelColor=11141d&color=8b6cff&logo=nuget&logoColor=white"></a>
+        <a href="https://www.nuget.org/packages/{{ page.nuget }}" rel="noopener"><img alt="NuGet downloads" src="https://img.shields.io/nuget/dt/{{ page.nuget }}?style=flat-square&labelColor=11141d&color=2dd4bf"></a>
+      {%- endif -%}
+      {%- if page.repo -%}
+        <a href="https://github.com/{{ page.repo }}/stargazers" rel="noopener"><img alt="GitHub stars" src="https://img.shields.io/github/stars/{{ page.repo }}?style=flat-square&labelColor=11141d&color=8b6cff&logo=github&logoColor=white"></a>
+        <a href="https://github.com/{{ page.repo }}/blob/main/LICENSE" rel="noopener"><img alt="License" src="https://img.shields.io/github/license/{{ page.repo }}?style=flat-square&labelColor=11141d&color=9aa4b8"></a>
+      {%- endif -%}
+      {%- for b in page.badges -%}
+        {%- if b.href -%}<a href="{{ b.href }}" rel="noopener"><img alt="{{ b.alt }}" src="{{ b.img }}"></a>{%- else -%}<img alt="{{ b.alt }}" src="{{ b.img }}">{%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- if page.features -%}
+<section class="features wrap">
+  <div class="feature-grid">
+    {%- for f in page.features -%}
+      {%- if f.href -%}
+      <a class="feature-card feature-card--link" href="{{ f.href }}">
+        {%- if f.icon -%}<div class="feature-icon">{{ f.icon }}</div>{%- endif -%}
+        <h3>{{ f.title }} <span class="feature-arrow">→</span></h3>
+        <p>{{ f.body }}</p>
+      </a>
+      {%- else -%}
+      <div class="feature-card">
+        {%- if f.icon -%}<div class="feature-icon">{{ f.icon }}</div>{%- endif -%}
+        <h3>{{ f.title }}</h3>
+        <p>{{ f.body }}</p>
+      </div>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}
+
+{%- assign body = content | strip -%}
+{%- if body != "" -%}
+<section class="content wrap">
+  <div class="prose">
+    {{ content }}
+  </div>
+</section>
+{%- endif -%}

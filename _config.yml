@@ -1,0 +1,42 @@
+# dmon-pages — the shared theme repo for the daemonicai project family.
+#
+# This repo is consumed by sibling repos via `remote_theme: daemonicai/dmon-pages`.
+# The settings below configure dmon-pages' OWN demo/hub site only; consuming
+# sites supply their own _config.yml.
+
+title: daemonicai
+tagline: .NET-native agent tooling
+description: >-
+  Open-source .NET tooling for building coding agents — the dmon agent core,
+  its terminal UI, memory, and extensions.
+
+# Served as a project page at daemonicai.github.io/dmon-pages
+baseurl: "/dmon-pages"
+url: "https://daemonicai.github.io"
+
+github:
+  owner: daemonicai
+  repo: dmon-pages
+
+# org-wide
+org_url: "https://github.com/daemonicai"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+
+# This repo IS the theme, so it renders itself from local _layouts/_includes.
+# (Consumers set `remote_theme: daemonicai/dmon-pages`.)
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - .jekyll-cache
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "home"

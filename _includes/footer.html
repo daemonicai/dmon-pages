@@ -1,0 +1,41 @@
+{%- assign org = site.org_url | default: "https://github.com/daemonicai" -%}
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand" href="https://daemonicai.github.io/dmon-pages/">
+        <span class="brand-mark">◈</span>
+        <span class="brand-name">daemonic<span class="brand-ai">ai</span></span>
+      </a>
+      <p class="footer-tag">Open-source .NET-native tooling for building coding agents.</p>
+    </div>
+
+    <nav class="footer-col" aria-label="Project family">
+      <h3>The family</h3>
+      {%- assign projects = "dmon-core::dmon::the agent core|dcli::dcli::inline terminal UI|dmon-meko::dmon-meko::long-term memory|dmon-websearch::dmon-websearch::web search extension" | split: "|" -%}
+      {%- for p in projects -%}
+        {%- assign parts = p | split: "::" -%}
+        {%- assign slug = parts[0] -%}
+        {%- assign path = "/" | append: slug -%}
+        {%- assign href = "https://daemonicai.github.io" | append: path | append: "/" -%}
+        <a href="{{ href }}"{% if site.baseurl == path %} class="active"{% endif %}>
+          <span class="fp-name">{{ parts[1] }}</span>
+          <span class="fp-desc">{{ parts[2] }}</span>
+        </a>
+      {%- endfor -%}
+    </nav>
+
+    <nav class="footer-col" aria-label="Source">
+      <h3>Source</h3>
+      <a href="{{ org }}">GitHub org</a>
+      {%- if site.github.owner and site.github.repo -%}
+        <a href="https://github.com/{{ site.github.owner }}/{{ site.github.repo }}">This repo</a>
+      {%- endif -%}
+      <a href="https://www.nuget.org/profiles/daemonicai">NuGet</a>
+    </nav>
+  </div>
+
+  <div class="wrap footer-base">
+    <span>© {{ site.time | date: '%Y' }} daemonicai</span>
+    <span class="footer-built">Built with Jekyll · shared <a href="https://daemonicai.github.io/dmon-pages/">dmon-pages</a> theme</span>
+  </div>
+</footer>
