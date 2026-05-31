@@ -178,7 +178,7 @@ a:hover { color: var(--accent-2); }
 // ── Footer ────────────────────────────────────────────────────────────────
 .site-footer { margin-top: 72px; border-top: 1px solid var(--border); background: var(--bg-2); }
 .footer-grid {
-  display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px;
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px;
   padding: 48px 24px 36px;
 }
 .footer-brand .brand { font-size: 1.1rem; }
