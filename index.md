@@ -1,24 +1,23 @@
 ---
 layout: home
-title: daemonicai
-tagline: open source · .NET 10
+title: dmon-pages
+tagline: shared theme · jekyll remote_theme
 lead: >-
-  .NET-native tooling for building coding agents — a self-extensible agent core,
-  the terminal UI behind it, durable memory, and provider-grounded extensions.
+  The shared GitHub Pages theme for the daemonicai family. Every project site sets
+  remote_theme: daemonicai/dmon-pages and supplies only its own content — so the
+  look stays consistent everywhere from a single source.
+repo: daemonicai/dmon-pages
 ctas:
-  - label: Browse the org →
-    href: https://github.com/daemonicai
-    primary: true
-  - label: dmon, the agent core
-    href: https://daemonicai.github.io/dmon-core/
+  - { label: "View on GitHub →", href: "https://github.com/daemonicai/dmon-pages", primary: true }
+  - { label: "daemonicai home", href: "https://daemonicai.github.io/" }
 features:
   - icon: "◈"
     title: dmon-core
-    body: A .NET-native coding agent inspired by Pi. Self-extensible via NuGet, JSONL/stdio RPC, conservative permissions.
+    body: A .NET-native coding agent inspired by Pi. Self-extensible via NuGet.
     href: https://daemonicai.github.io/dmon-core/
   - icon: "▮"
     title: dcli
-    body: Inline terminal rendering — the Claude-Code-style CLI model as a reusable .NET library.
+    body: Inline terminal rendering — the Claude-Code-style CLI model as a .NET library.
     href: https://daemonicai.github.io/dcli/
   - icon: "❖"
     title: dmon-meko
@@ -26,20 +25,28 @@ features:
     href: https://daemonicai.github.io/dmon-meko/
   - icon: "⌕"
     title: dmon-websearch
-    body: An out-of-tree web_search extension using the agent-in-a-tool pattern with provider-grounded search.
+    body: An out-of-tree web_search extension using the agent-in-a-tool pattern.
     href: https://daemonicai.github.io/dmon-websearch/
 ---
 
-## One stack, many pieces
+## Add a site
 
-The **daemonicai** projects are built to fit together. `dmon-core` is the agent;
-`dcli` renders its terminal surface; `dmon-meko` gives it memory; `dmon-websearch`
-is the reference out-of-tree extension. Each ships independently on NuGet, and each
-site you're looking at shares this one theme.
+Push a `gh-pages` branch with a `_config.yml`:
 
-## About this repo
+```yaml
+remote_theme: daemonicai/dmon-pages
+baseurl: "/your-repo-name"
+url: "https://daemonicai.github.io"
+title: your-project
+github: { owner: daemonicai, repo: your-repo-name }
+plugins: [jekyll-remote-theme, jekyll-seo-tag]
+defaults:
+  - scope: { path: "" }
+    values: { layout: home }
+```
 
-`dmon-pages` is the shared Jekyll **remote theme** for the whole family. Every
-project site sets `remote_theme: daemonicai/dmon-pages` and supplies only its own
-content — so the look stays consistent everywhere from a single source. See the
-[README](https://github.com/daemonicai/dmon-pages#readme) for how to add a new site.
+…and an `index.md` whose front matter drives the hero, badges, and feature grid
+(`title`, `tagline`, `lead`, `repo`, `nuget`, `features`). The
+[README](https://github.com/daemonicai/dmon-pages#readme) has the full template.
+
+Edit the theme here once, and every site picks up the change on its next build.
